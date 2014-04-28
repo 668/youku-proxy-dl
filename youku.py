@@ -37,7 +37,7 @@ class ChinaProxy(object):
 		return random_proxy
 
 def download_video(url, proxy):
-	arglist = ['/usr/local/bin/youtube-dl', '-o', os.getcwd() + '/%(id)s.%(ext)s', '--proxy', proxy, url]
+	arglist = ['youtube-dl', '-o', os.getcwd() + '/%(id)s.%(ext)s', '--proxy', proxy, url]
 
 	p = subprocess.Popen(arglist)
 	p.wait()
@@ -62,7 +62,7 @@ def concat_video(video_id):
 			f.write("file '" + video + "'\n")
 
 	print('[concat] Starting concatenation')
-	arglist = ['/usr/local/bin/ffmpeg', '-f', 'concat', '-i', 'videolist.txt', '-c', 'copy', video_id + '.flv']
+	arglist = ['ffmpeg', '-f', 'concat', '-i', 'videolist.txt', '-c', 'copy', video_id + '.flv']
 	p = subprocess.Popen(arglist, stderr=open(os.devnull, 'wb'))
 	p.wait()
 	print(p.returncode)
